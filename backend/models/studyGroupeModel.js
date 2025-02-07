@@ -40,4 +40,4 @@ const studyGroupSchema = mongoose.Schema({
     }],
   }, { timestamps: true });
 
-mod
+module.export = mongoose.model("StudyGroup", studyGroupSchema)
