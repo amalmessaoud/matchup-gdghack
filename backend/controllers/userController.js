@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler")
 const bcrypt = require("bcrypt");
 const User = require("../models/userModel")
+const jwt = require("jsonwebtoken")
 //@description Get all contacts
 //@route GET /api/contacts
 //access public
@@ -27,7 +28,28 @@ const registerUser =  asyncHandler(async (req,res)=>{
 });
 
 const loginUser =  asyncHandler(async (req,res)=>{
-    res.json({message : "cc mn login"})
+    const {email, password} = req.body;
+    if(!email || !password) {
+        res.status(400);
+        throw new Error("All fields are mendatory!");
+    }
+    const user = await User.findOne({email});
+    if(user &&(await bcrypt.compare(password, user.password))){
+        const token = jwt.sign({
+            user : {
+                email : user.email,
+                username : user.username,
+                id : user.id,
+            }
+        }, process.env.SECRET_KEY, {
+            expiresIn : "1h",
+            });
+        res.status(200).json({token})
+    } else{
+        res.status(401);
+        throw new Error("Invalid username or password");
+    }
+    
 });
 
 const getCurrentUser =  asyncHandler(async (req,res)=>{
