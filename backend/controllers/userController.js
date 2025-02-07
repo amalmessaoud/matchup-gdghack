@@ -6,27 +6,65 @@ const jwt = require("jsonwebtoken")
 //@route GET /api/contacts
 //access public
 
-const registerUser =  asyncHandler(async (req,res)=>{
-    const {full_name,username, password, email, school_year, receives_notifications, skills, interests} = req.body;
-    if (!full_name || !username || !password || !email || !school_year){
-        res.status(400).json;
-        throw new Error("Fill mendatory fields!");
+const registerUser = asyncHandler(async (req, res) => {
+    const { full_name, username, password, email, school_year, receives_notifications, skills, interests } = req.body;
+
+    if (!full_name || !username || !password || !email || !school_year) {
+        res.status(400);
+        throw new Error("Fill mandatory fields!");
     }
+
+    // Check if the user already exists
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+        res.status(400);
+        throw new Error("User already exists!");
+    }
+
+    // Hash the password before saving
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create the user
     const user = await User.create({
-        ...req.body,
-        password : hashedPassword,
-    })
-    console.log(`User created : ${user}`)
-    if(user){
-        res.status(201).json({_id : user.id, email:user.email})
-    }
-    else{
-        res.status(400)
-        throw new Error("Failed to create user!")
+        full_name,
+        username,
+        password: hashedPassword,
+        email,
+        school_year,
+        receives_notifications: receives_notifications || true,
+        skills: skills || [],
+        interests: interests || []
+    });
+
+    console.log(`User created: ${user}`);
+
+    if (user) {
+        // Generate JWT Token
+        const token = jwt.sign(
+            {
+                user: {
+                    id: user.id,
+                    email: user.email,
+                    username: user.username,
+                },
+            },
+            process.env.SECRET_KEY,
+            { expiresIn: "1h" }
+        );
+
+        res.status(201).json({
+            _id: user.id,
+            full_name: user.full_name,
+            username: user.username,
+            email: user.email,
+            school_year: user.school_year,
+            token,
+        });
+    } else {
+        res.status(400);
+        throw new Error("Failed to create user!");
     }
 });
-
 const loginUser =  asyncHandler(async (req,res)=>{
     const {email, password} = req.body;
     if(!email || !password) {
