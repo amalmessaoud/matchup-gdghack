@@ -15,7 +15,8 @@ const userSchema = mongoose.Schema({
     },
     email : {
         type : String,
-        required  : [true, "Please add the contact email adresse"]
+        required  : [true, "Please add the contact email adresse"],
+        unique : [true, "This email belongs to an account already"]
     },
     school_year : {
         type : String,
@@ -32,7 +33,7 @@ const userSchema = mongoose.Schema({
         enum : ["frontend", "backend", "devops", "AI", "cybersecurity", "mobile"],
         default : [],
     },
-    receives_notification : {
+    receives_notifications : {
         type : Boolean,
         default : true, 
     }
