@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 // SkillExchange Model
 const skillExchangeSchema = mongoose.Schema({
     user1: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
