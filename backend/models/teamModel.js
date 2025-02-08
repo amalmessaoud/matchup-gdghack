@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
   // Team Model (created once team is finalized)
   const teamSchema = mongoose.Schema({
     members: [{

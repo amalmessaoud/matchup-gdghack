@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 // StudyGroup Model
 const studyGroupSchema = mongoose.Schema({
     topic: {
@@ -40,4 +41,4 @@ const studyGroupSchema = mongoose.Schema({
     }],
   }, { timestamps: true });
 
-module.export = mongoose.model("StudyGroup", studyGroupSchema)
+module.exports = mongoose.model("StudyGroup", studyGroupSchema)

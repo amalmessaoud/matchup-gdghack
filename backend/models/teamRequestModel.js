@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 // TeamRequest Model
 const teamRequestSchema = mongoose.Schema({
     postedBy: {
