@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+    font-family: 'Poppins' , sans-serif;
+}
+
+.t1 { 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Poppins' , sans-serif;
+    margin: 0px;
+}
+
+#title2 {
+    color: #8370b3; 
+    margin: 0px;
+    font-size: 32px; 
+    padding:10px
+ ;}
+
+ #Title1{margin:0px;
+padding: 10px; }
+
+
+
+.user_info{
+            font-size: 20px;
+            text-shadow:rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-family: 'Poppins' , sans-serif;
+            border-radius: 30px;
+
+}
+
+img {
+    width:300px;
+    height: 300px;
+    border-image: rgb(31, 29, 29);
+}
+
+#password { 
+    width:400px;
+     height: 30px;
+     border-radius: 15px;
+     border-color: rgb(190, 183, 183);
+     border-top:10px; 
+}
+
+
+.container {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 90px;
+    
+}
+
+#b{ width: 400px;
+    border-radius: 17px;
+    height: 30;
+   background-color: #a590d6;
+   color: white ;
+    cursor: pointer;
+    border-bottom: 10px ;
+}
+
+#b:hover{ background-color: #8b6fd1;}
+
+#email{ width:400px;
+    height: 30px;
+border-radius: 15px;
+border-color: rgb(190, 183, 183);
+border-top:10px; }
+
+.divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* يجعل الخطوط تمتد بعرض العنصر */
+    margin: 20px 0;
+  }
+  
+  .line {
+    flex-grow: 1; /* يجعل الخط يأخذ المساحة المتاحة */
+    height: 2px; /* سماكة الخط */
+    background-color: rgb(134, 120, 120); /* لون الخط */
+    margin: 0 10px; /* مسافة بين الخط والنص */
+  }
+  
+  .or-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    white-space: nowrap; /* يمنع "Or" من النزول إلى سطر جديد */
+  }
+  
+
